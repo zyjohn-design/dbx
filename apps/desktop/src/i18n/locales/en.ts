@@ -66,6 +66,32 @@ const consul = {
 };
 
 export default {
+  remoteWorkspace: {
+    title: "Remote servers",
+    description: "Open a server workspace in a separate window. Connections and queries are managed by that server.",
+    name: "Server name",
+    namePlaceholder: "Production",
+    url: "DBX Web address",
+    loginHint: "Sign in inside the workspace. Closing its window ends this login session.",
+    test: "Test connection",
+    testSuccess: "Connected to a compatible DBX server.",
+    edit: "Edit server",
+    connect: "Open",
+    add: "Add server",
+    empty: "No remote servers yet.",
+    removeConfirm: "Remove “{name}” from this device? The server and its connections will be kept.",
+    errors: {
+      INVALID_URL: "Enter an HTTP or HTTPS address without credentials, a query, or a fragment.",
+      INVALID_NAME: "Enter a server name of 1–80 characters.",
+      DUPLICATE_URL: "This server address has already been added.",
+      WORKSPACE_OPEN: "Close this server workspace before editing or removing it.",
+      SERVER_UNREACHABLE: "Unable to reach the server. Check its address, network, and HTTPS certificate.",
+      INVALID_SERVER: "This address did not return a valid DBX response. Enter the deployment address, including any path prefix.",
+      SERVER_UPGRADE_REQUIRED: "Update the server to a DBX build that supports desktop remote workspaces.",
+      WORKSPACE_NOT_FOUND: "This server no longer exists in the saved list.",
+      FAILED: "The operation failed. Please try again.",
+    },
+  },
   oracleTrigger: {
     errorPositionUnavailable: "Source opened. The error location could not be verified; check the reported line and column.",
     reconcileStructure: "Reconcile applied changes",

@@ -12,6 +12,32 @@ import { mongodbDatabaseDumpZhCN as mongoDump } from "./mongodbDatabaseDump";
 import { damengDumpZhCN as damengDump } from "./damengDump";
 
 export default withEnglishFallback({
+  remoteWorkspace: {
+    title: "远程服务器",
+    description: "在独立窗口打开服务器工作区，连接配置和查询均由该服务器管理。",
+    name: "服务器名称",
+    namePlaceholder: "生产环境",
+    url: "DBX 网页地址",
+    loginHint: "在工作区内登录，关闭窗口后需要重新登录。",
+    test: "测试连接",
+    testSuccess: "已连接到兼容的 DBX 服务器。",
+    edit: "编辑服务器",
+    connect: "打开",
+    add: "添加服务器",
+    empty: "尚未添加远程服务器。",
+    removeConfirm: "从本机移除“{name}”？服务器及其连接配置会保留。",
+    errors: {
+      INVALID_URL: "请输入 HTTP 或 HTTPS 地址，不要包含账号密码、查询参数或片段。",
+      INVALID_NAME: "请输入 1～80 个字符的服务器名称。",
+      DUPLICATE_URL: "此服务器地址已添加。",
+      WORKSPACE_OPEN: "请先关闭该服务器工作区，再编辑或移除。",
+      SERVER_UNREACHABLE: "无法连接服务器，请检查地址、网络和 HTTPS 证书。",
+      INVALID_SERVER: "该地址未返回有效的 DBX 响应，请填写部署地址并包含路径前缀。",
+      SERVER_UPGRADE_REQUIRED: "请将服务器更新为支持桌面远程工作区的 DBX 版本。",
+      WORKSPACE_NOT_FOUND: "保存的列表中已不存在此服务器。",
+      FAILED: "操作失败，请重试。",
+    },
+  },
   oracleTrigger: {
     errorPositionUnavailable: "源码已打开，但无法核实错误位置，请按原行列检查。",
     reconcileStructure: "核对已执行改动",

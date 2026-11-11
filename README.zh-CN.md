@@ -436,6 +436,8 @@ flatpak install flatpark com.dbxio.dbx
 
 DBX 提供 Web 版本，可通过 Docker 部署。示例使用 `latest` 标签以拉取当前发布版本。
 
+包含[远程工作区功能](docs/remote-workspaces.md)的桌面客户端支持添加 DBX 网页服务器，并在独立原生窗口使用服务器上的配置和数据库连接。服务端与客户端均需包含此功能，尚未支持的旧版发布镜像需要更新。
+
 ```bash
 # 默认将密钥保存在持久化的 /app/data 数据卷中。
 docker run -d --pull=always --name dbx -p 4224:4224 \

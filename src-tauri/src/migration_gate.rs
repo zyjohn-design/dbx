@@ -57,6 +57,12 @@ pub fn guard_handler<R: tauri::Runtime>(
     handler: impl Fn(tauri::ipc::Invoke<R>) -> bool + Send + Sync + 'static,
 ) -> impl Fn(tauri::ipc::Invoke<R>) -> bool + Send + Sync + 'static {
     move |invoke| {
+        // Remote Web UIs never inherit the local app's custom commands, even
+        // if a page directly calls IPC instead of honoring the runtime marker.
+        if crate::commands::remote_workspaces::is_remote_workspace_window(invoke.message.webview_ref().label()) {
+            invoke.resolver.reject("REMOTE_WORKSPACE_IPC_DENIED");
+            return true;
+        }
         let ready = invoke.message.state_ref().try_get::<Arc<MigrationGate>>().is_some_and(|gate| gate.is_ready());
         if !ready && !allowed_command(invoke.message.command()) {
             invoke.resolver.reject("DATA_MIGRATION_REQUIRED");
@@ -127,6 +133,15 @@ mod tests {
         assert_eq!(calls.load(Ordering::SeqCst), 2);
         gate.set_ready(true);
         assert!(get_ipc_response(&webview, request("load_connections")).is_ok());
+        assert_eq!(calls.load(Ordering::SeqCst), 3);
+        let remote =
+            tauri::WebviewWindowBuilder::new(&app, "remote-workspace-test", Default::default()).build().unwrap();
+        for command in ["load_connections", "open_remote_workspace", "migration_status", "quit_app"] {
+            assert_eq!(
+                get_ipc_response(&remote, request(command)).unwrap_err(),
+                serde_json::json!("REMOTE_WORKSPACE_IPC_DENIED")
+            );
+        }
         assert_eq!(calls.load(Ordering::SeqCst), 3);
     }
     #[tokio::test]

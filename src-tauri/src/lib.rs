@@ -2349,7 +2349,9 @@ pub fn run() {
                 // the tray would keep their plugin instance — audio included —
                 // running invisibly, and the app-wide close prompt belongs to the
                 // main shell, not to a widget the user dismissed.
-                if window.label().starts_with("plugin-floating-") {
+                if window.label().starts_with("plugin-floating-")
+                    || commands::remote_workspaces::is_remote_workspace_window(window.label())
+                {
                     return;
                 }
                 if let Some(tab_id) = window.label().strip_prefix("detached-tab-") {
@@ -2386,6 +2388,11 @@ pub fn run() {
             }
         })
         .invoke_handler(migration_gate::guard_handler(route_external_commands(tauri::generate_handler![
+            commands::remote_workspaces::load_remote_workspaces,
+            commands::remote_workspaces::save_remote_workspace,
+            commands::remote_workspaces::remove_remote_workspace,
+            commands::remote_workspaces::test_remote_workspace,
+            commands::remote_workspaces::open_remote_workspace,
             commands::ai::ai_complete,
             commands::ai::ai_stream,
             commands::ai::ai_agent_stream,

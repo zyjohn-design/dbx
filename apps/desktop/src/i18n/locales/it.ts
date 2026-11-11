@@ -65,6 +65,32 @@ const consul = {
 };
 
 export default withEnglishFallback({
+  remoteWorkspace: {
+    title: "Server remoti",
+    description: "Apri lo spazio del server in una finestra separata. Il server gestisce connessioni e query.",
+    name: "Nome del server",
+    namePlaceholder: "Produzione",
+    url: "Indirizzo web DBX",
+    loginHint: "Accedi nello spazio di lavoro. La sessione termina quando chiudi la finestra.",
+    test: "Verifica connessione",
+    testSuccess: "Connesso a un server DBX compatibile.",
+    edit: "Modifica server",
+    connect: "Apri",
+    add: "Aggiungi server",
+    empty: "Nessun server remoto.",
+    removeConfirm: "Rimuovere «{name}» da questo dispositivo? Il server e le connessioni saranno conservati.",
+    errors: {
+      INVALID_URL: "Inserisci un indirizzo HTTP o HTTPS senza credenziali, parametri o frammenti.",
+      INVALID_NAME: "Inserisci un nome da 1 a 80 caratteri.",
+      DUPLICATE_URL: "Questo indirizzo è già stato aggiunto.",
+      WORKSPACE_OPEN: "Chiudi lo spazio del server prima di modificarlo o rimuoverlo.",
+      SERVER_UNREACHABLE: "Impossibile connettersi. Controlla indirizzo, rete e certificato HTTPS.",
+      INVALID_SERVER: "L’indirizzo non ha restituito una risposta DBX valida. Includi il prefisso del percorso di distribuzione.",
+      SERVER_UPGRADE_REQUIRED: "Aggiorna il server a una versione DBX che supporti gli spazi remoti desktop.",
+      WORKSPACE_NOT_FOUND: "Questo server non è più presente nell’elenco salvato.",
+      FAILED: "Operazione non riuscita. Riprova.",
+    },
+  },
   oracleTrigger: {
     errorPositionUnavailable: "Sorgente aperto. Impossibile verificare la posizione dell'errore; controllare la riga e la colonna indicate.",
     reconcileStructure: "Riconcilia le modifiche applicate",

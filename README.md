@@ -431,6 +431,8 @@ Windows/macOS/Linux startup and persistent container backup volumes.
 DBX provides a web version that can be deployed via Docker. The examples use
 the `latest` tag to pull the current release.
 
+Desktop builds with [remote workspace support](docs/remote-workspaces.md) can save DBX Web server addresses and open their workspaces in native windows. Both the server and desktop must include this feature; older published images require an update.
+
 ```bash
 # The default keeps the key in the persistent /app/data volume.
 docker run -d --pull=always --name dbx -p 4224:4224 \

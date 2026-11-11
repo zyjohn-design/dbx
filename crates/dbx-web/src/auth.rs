@@ -46,6 +46,8 @@ pub struct AuthCheckResponse {
     pub authenticated: bool,
     pub required: bool,
     pub setup_required: bool,
+    /// The frontend honors the native remote-workspace marker and uses HTTP.
+    pub desktop_workspace_supported: bool,
 }
 
 const MAX_ATTEMPTS: u32 = 5;
@@ -225,17 +227,27 @@ pub async fn setup(State(state): State<Arc<WebState>>, Json(body): Json<LoginReq
 
 pub async fn check(State(state): State<Arc<WebState>>, req: Request<axum::body::Body>) -> Json<AuthCheckResponse> {
     if state.password_disabled {
-        return Json(AuthCheckResponse { authenticated: true, required: false, setup_required: false });
+        return Json(AuthCheckResponse {
+            authenticated: true,
+            required: false,
+            setup_required: false,
+            desktop_workspace_supported: true,
+        });
     }
     let has_password = state.password_hash.read().await.is_some();
     if !has_password {
-        return Json(AuthCheckResponse { authenticated: false, required: false, setup_required: true });
+        return Json(AuthCheckResponse {
+            authenticated: false,
+            required: false,
+            setup_required: true,
+            desktop_workspace_supported: true,
+        });
     }
     let authenticated = match extract_session_token(&req) {
         Some(token) => state.sessions.read().await.contains(&token),
         None => false,
     };
-    Json(AuthCheckResponse { authenticated, required: true, setup_required: false })
+    Json(AuthCheckResponse { authenticated, required: true, setup_required: false, desktop_workspace_supported: true })
 }
 
 pub async fn change_password(

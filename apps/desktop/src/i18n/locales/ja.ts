@@ -66,6 +66,32 @@ const consul = {
 };
 
 export default withEnglishFallback({
+  remoteWorkspace: {
+    title: "リモートサーバー",
+    description: "サーバーのワークスペースを別のウィンドウで開きます。接続設定とクエリはサーバーで管理されます。",
+    name: "サーバー名",
+    namePlaceholder: "本番環境",
+    url: "DBX Web のアドレス",
+    loginHint: "ワークスペース内でログインします。ウィンドウを閉じるとログインセッションが終了します。",
+    test: "接続テスト",
+    testSuccess: "互換性のある DBX サーバーに接続しました。",
+    edit: "サーバーを編集",
+    connect: "開く",
+    add: "サーバーを追加",
+    empty: "リモートサーバーはまだありません。",
+    removeConfirm: "この端末から「{name}」を削除しますか？サーバーと接続設定は保持されます。",
+    errors: {
+      INVALID_URL: "認証情報、クエリ、フラグメントを含まない HTTP または HTTPS アドレスを入力してください。",
+      INVALID_NAME: "サーバー名は 1～80 文字で入力してください。",
+      DUPLICATE_URL: "このサーバーアドレスは追加済みです。",
+      WORKSPACE_OPEN: "編集または削除する前に、このサーバーのワークスペースを閉じてください。",
+      SERVER_UNREACHABLE: "接続できません。アドレス、ネットワーク、HTTPS 証明書を確認してください。",
+      INVALID_SERVER: "有効な DBX 応答が返されませんでした。パスの接頭辞を含むデプロイ先のアドレスを入力してください。",
+      SERVER_UPGRADE_REQUIRED: "デスクトップのリモートワークスペースに対応した DBX にサーバーを更新してください。",
+      WORKSPACE_NOT_FOUND: "このサーバーは保存済みリストに存在しません。",
+      FAILED: "操作に失敗しました。もう一度お試しください。",
+    },
+  },
   oracleTrigger: {
     errorPositionUnavailable: "ソースを開きました。エラー位置を確認できないため、表示された行と列を確認してください。",
     reconcileStructure: "実行済みの変更を照合",

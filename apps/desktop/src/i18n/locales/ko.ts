@@ -65,6 +65,32 @@ const consul = {
 };
 
 export default withEnglishFallback({
+  remoteWorkspace: {
+    title: "원격 서버",
+    description: "별도 창에서 서버 작업 공간을 엽니다. 연결 설정과 쿼리는 서버에서 관리합니다.",
+    name: "서버 이름",
+    namePlaceholder: "운영 환경",
+    url: "DBX 웹 주소",
+    loginHint: "작업 공간에서 로그인하세요. 창을 닫으면 로그인 세션이 종료됩니다.",
+    test: "연결 테스트",
+    testSuccess: "호환되는 DBX 서버에 연결했습니다.",
+    edit: "서버 편집",
+    connect: "열기",
+    add: "서버 추가",
+    empty: "추가된 원격 서버가 없습니다.",
+    removeConfirm: "이 기기에서 “{name}”을(를) 제거할까요? 서버와 연결 설정은 유지됩니다.",
+    errors: {
+      INVALID_URL: "인증 정보, 쿼리, 프래그먼트가 없는 HTTP 또는 HTTPS 주소를 입력하세요.",
+      INVALID_NAME: "서버 이름을 1~80자로 입력하세요.",
+      DUPLICATE_URL: "이미 추가된 서버 주소입니다.",
+      WORKSPACE_OPEN: "편집하거나 제거하기 전에 서버 작업 공간을 닫으세요.",
+      SERVER_UNREACHABLE: "연결할 수 없습니다. 주소, 네트워크, HTTPS 인증서를 확인하세요.",
+      INVALID_SERVER: "유효한 DBX 응답이 없습니다. 경로 접두사를 포함한 배포 주소를 입력하세요.",
+      SERVER_UPGRADE_REQUIRED: "서버를 데스크톱 원격 작업 공간을 지원하는 DBX 버전으로 업데이트하세요.",
+      WORKSPACE_NOT_FOUND: "저장된 목록에 이 서버가 없습니다.",
+      FAILED: "작업에 실패했습니다. 다시 시도하세요.",
+    },
+  },
   oracleTrigger: {
     errorPositionUnavailable: "소스를 열었습니다. 오류 위치를 확인할 수 없으므로 표시된 행과 열을 확인하세요.",
     reconcileStructure: "적용된 변경 사항 대조",

@@ -68,6 +68,32 @@ const consul = {
 };
 
 export default withEnglishFallback({
+  remoteWorkspace: {
+    title: "遠端伺服器",
+    description: "在獨立視窗開啟伺服器工作區，連線設定和查詢均由該伺服器管理。",
+    name: "伺服器名稱",
+    namePlaceholder: "正式環境",
+    url: "DBX 網頁位址",
+    loginHint: "在工作區內登入，關閉視窗後需要重新登入。",
+    test: "測試連線",
+    testSuccess: "已連線至相容的 DBX 伺服器。",
+    edit: "編輯伺服器",
+    connect: "開啟",
+    add: "新增伺服器",
+    empty: "尚未新增遠端伺服器。",
+    removeConfirm: "從本機移除「{name}」？伺服器及其連線設定會保留。",
+    errors: {
+      INVALID_URL: "請輸入 HTTP 或 HTTPS 位址，不要包含帳號密碼、查詢參數或片段。",
+      INVALID_NAME: "請輸入 1～80 個字元的伺服器名稱。",
+      DUPLICATE_URL: "此伺服器位址已新增。",
+      WORKSPACE_OPEN: "請先關閉該伺服器工作區，再編輯或移除。",
+      SERVER_UNREACHABLE: "無法連線至伺服器，請檢查位址、網路及 HTTPS 憑證。",
+      INVALID_SERVER: "此位址未傳回有效的 DBX 回應，請填寫部署位址並包含路徑前綴。",
+      SERVER_UPGRADE_REQUIRED: "請將伺服器更新為支援桌面遠端工作區的 DBX 版本。",
+      WORKSPACE_NOT_FOUND: "已儲存的清單中已不存在此伺服器。",
+      FAILED: "操作失敗，請重試。",
+    },
+  },
   oracleTrigger: {
     errorPositionUnavailable: "原始碼已開啟，但無法核實錯誤位置，請依原行列檢查。",
     reconcileStructure: "核對已執行變更",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, defineAsyncComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { translateBackendError } from "@/i18n/backend-errors";
 import { Upload, Download, ArrowDownUp, FolderPlus, FolderOpen, RefreshCw, ChevronsLeft, ChevronsDownUp, Trash2, FolderInput, Check, Minus, Square, X, Server } from "@lucide/vue";
@@ -20,6 +20,11 @@ import { useToast } from "@/composables/useToast";
 import type { QueryTab, TreeNode } from "@/types/database";
 import type { ObjectDependencyTarget } from "@/lib/database/objectDependencyDetails";
 import type { SqlObjectNavigationTarget } from "@/lib/sql/sqlNavigation";
+import { isTauriRuntime } from "@/lib/backend/tauriRuntime";
+
+const RemoteWorkspacesDialog = defineAsyncComponent(() => import("@/components/connection/RemoteWorkspacesDialog.vue"));
+const desktopRuntime = isTauriRuntime();
+const showRemoteWorkspaces = ref(false);
 
 defineProps<{
   sidebarWidth: number;
@@ -244,6 +249,9 @@ defineExpose({ focusSearch, locateTabInSidebar, disconnectAllActiveConnections, 
   <div data-app-sidebar class="app-sidebar-panel h-full shrink-0 relative select-none" :class="classicLayout ? '' : 'dbx-panel bg-background'" :style="{ width: sidebarWidth + 'px' }" @keydown="onSidebarKeydown">
     <div class="h-full flex flex-col overflow-hidden rounded-[inherit]">
       <div class="app-sidebar-toolbar flex items-center gap-px px-3 text-xs font-medium text-muted-foreground border-b bg-muted/20" :class="classicLayout ? 'h-9' : 'h-10'">
+        <LightTooltip v-if="desktopRuntime" :text="t('remoteWorkspace.title')" side="bottom" :delay="0" nowrap>
+          <Button variant="ghost" size="icon" class="mr-1 h-6 w-6" :aria-label="t('remoteWorkspace.title')" @click="showRemoteWorkspaces = true"><Server class="h-3.5 w-3.5" /></Button>
+        </LightTooltip>
         <span v-if="showConnectionMultiSelectToolbar" class="flex min-w-0 self-stretch items-center" data-tauri-drag-region>
           <span class="truncate" data-tauri-drag-region>{{ t("sidebar.connections") }}</span>
           <span class="ml-1.5 shrink-0 text-[11px] font-normal text-muted-foreground/80" data-connection-selection-count>
@@ -336,6 +344,7 @@ defineExpose({ focusSearch, locateTabInSidebar, disconnectAllActiveConnections, 
           </span>
         </template>
       </div>
+      <RemoteWorkspacesDialog v-if="showRemoteWorkspaces" v-model:open="showRemoteWorkspaces" />
       <div data-sidebar-connection-tree class="flex-1 min-h-0">
         <ConnectionTree
           ref="connectionTreeRef"

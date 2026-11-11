@@ -286,6 +286,7 @@ async function loadNativeDebugLogs(): Promise<string> {
 }
 
 function isTauriRuntimeLike(): boolean {
+  if ((globalThis as Record<string, unknown>).__DBX_REMOTE_WORKSPACE__ === true) return false;
   return "__TAURI_INTERNALS__" in globalThis || "__TAURI__" in globalThis;
 }
 
